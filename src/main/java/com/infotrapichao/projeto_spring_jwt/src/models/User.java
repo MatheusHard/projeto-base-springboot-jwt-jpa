@@ -1,9 +1,12 @@
 package com.infotrapichao.projeto_spring_jwt.src.models;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class User {
@@ -18,7 +21,7 @@ public class User {
     @Column(length = 50, nullable = false)
     private String email;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 255, nullable = false)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -29,7 +32,12 @@ public class User {
     public List<String> getRoles() {
         return roles;
     }
-
+    // Método para retornar as authorities a partir das roles
+    public List<GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // Adiciona "ROLE_" no prefixo, que é a convenção do Spring
+                .collect(Collectors.toList());
+    }
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }

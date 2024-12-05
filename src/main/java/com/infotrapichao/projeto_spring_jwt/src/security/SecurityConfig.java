@@ -7,19 +7,31 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "security.config")
 public class SecurityConfig {
 
-    public static String PREFIX;
-    public static String KEY;
-    public static Long EXPIRATION;
+    private String PREFIX;
+    private String KEY;
+    private Long EXPIRATION;
 
-    public static void setPREFIX(String PREFIX) {
-        SecurityConfig.PREFIX = PREFIX;
+    public String getPREFIX() {
+        return PREFIX;
     }
 
-    public static void setKEY(String KEY) {
-        SecurityConfig.KEY = KEY;
+    public void setPREFIX(String PREFIX) {
+        this.PREFIX = PREFIX;
     }
 
-    public static void setEXPIRATION(Long EXPIRATION) {
-        SecurityConfig.EXPIRATION = EXPIRATION;
+    public String getKEY() {
+        return KEY;
+    }
+
+    public void setKEY(String KEY) {
+        this.KEY = KEY;
+    }
+
+    public Long getEXPIRATION() {
+        return EXPIRATION;
+    }
+
+    public void setEXPIRATION(Long EXPIRATION) {
+        this.EXPIRATION = EXPIRATION;
     }
 }

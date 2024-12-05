@@ -5,6 +5,7 @@ import com.infotrapichao.projeto_spring_jwt.src.models.User;
 import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
 import com.infotrapichao.projeto_spring_jwt.src.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,18 +22,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping
-    public void postUser(@RequestBody User user){
+    public void postUser(@Validated  @RequestBody User user){
         userService.createUser(user);
     }
 
-    @GetMapping()
-    public List<User> getAll(){
-        return userService.getAll();
-    }
-  /*  @PostMapping()
-    public void post(@RequestBody User usuario){
-        userRepository.save(usuario);
-    }
     @PutMapping()
     public void put(@RequestBody User usuario){
         userRepository.save(usuario);
@@ -48,6 +41,6 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id){
         userRepository.deleteById(id);
-    }*/
+    }
 
 }

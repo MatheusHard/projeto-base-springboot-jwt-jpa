@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     //List<User> findByNameContaining(String name);
 
     //Query Method
-    //User findByUsername(String username);
+    User findByUsername(String username);
 
     //Query Override
     @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username= (:username)")

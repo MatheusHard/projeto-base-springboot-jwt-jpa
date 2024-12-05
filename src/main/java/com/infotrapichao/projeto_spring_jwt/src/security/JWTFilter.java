@@ -19,8 +19,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class JWTFilter extends OncePerRequestFilter {
-    @Override
+public class JWTFilter //extends OncePerRequestFilter {
+{
+   /* @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
@@ -31,7 +32,7 @@ public class JWTFilter extends OncePerRequestFilter {
         try{
             if(token != null && !token.isEmpty()){
 
-                JWTObject tokenObject = JWTCreator.create(token, SecurityConfig.PREFIX, SecurityConfig.KEY);
+                JWTObject tokenObject = JWTCreator.create(token, SecurityConfig.get, SecurityConfig.KEY);
 
                 List<SimpleGrantedAuthority> authorities = authorities(tokenObject.getRoles());
 
@@ -52,5 +53,5 @@ public class JWTFilter extends OncePerRequestFilter {
     }
     private List<SimpleGrantedAuthority> authorities(List<String> roles){
         return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
+    }*/
 }
