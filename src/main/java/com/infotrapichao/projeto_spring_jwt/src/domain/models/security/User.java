@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.models;
+package com.infotrapichao.projeto_spring_jwt.src.domain.models.security;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

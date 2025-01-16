@@ -2,10 +2,8 @@ package com.infotrapichao.projeto_spring_jwt.src.controller;
 
 import com.infotrapichao.projeto_spring_jwt.src.dtos.Login;
 import com.infotrapichao.projeto_spring_jwt.src.dtos.Session;
-import com.infotrapichao.projeto_spring_jwt.src.models.User;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
-import com.infotrapichao.projeto_spring_jwt.src.security.JWTCreator;
-import com.infotrapichao.projeto_spring_jwt.src.security.JWTObject;
 import com.infotrapichao.projeto_spring_jwt.src.security.JwtService;
 import com.infotrapichao.projeto_spring_jwt.src.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.security;
 
 
-import com.infotrapichao.projeto_spring_jwt.src.models.User;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

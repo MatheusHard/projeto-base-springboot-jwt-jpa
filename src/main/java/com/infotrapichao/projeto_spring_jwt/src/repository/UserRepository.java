@@ -1,6 +1,6 @@
 package com.infotrapichao.projeto_spring_jwt.src.repository;
 
-import com.infotrapichao.projeto_spring_jwt.src.models.User;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
