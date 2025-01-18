@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

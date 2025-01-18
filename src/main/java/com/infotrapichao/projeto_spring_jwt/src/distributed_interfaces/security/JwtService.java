@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

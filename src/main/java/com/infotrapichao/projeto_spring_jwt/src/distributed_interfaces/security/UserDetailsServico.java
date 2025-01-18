@@ -1,8 +1,8 @@
-package com.infotrapichao.projeto_spring_jwt.src.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security;
 
 
+import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.IUserApplication;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServico implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final IUserApplication _userApplication;
 
     @Autowired
-    public UserDetailsServico(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServico(IUserApplication userApplication) {
+        this._userApplication = userApplication;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userEntity = userRepository.findByUsername(username);
+        User userEntity = _userApplication.findByUsername(username);
 
         if (userEntity == null) {
             throw new UsernameNotFoundException("Usuário não encontrado: " + username);

@@ -1,6 +1,5 @@
-package com.infotrapichao.projeto_spring_jwt.src.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security;
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

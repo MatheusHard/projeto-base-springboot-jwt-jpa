@@ -1,8 +1,8 @@
-package com.infotrapichao.projeto_spring_jwt.src.service;
+package com.infotrapichao.projeto_spring_jwt.src.domain.services.security;
 
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
-import com.infotrapichao.projeto_spring_jwt.src.service.interfaces.IUserService;
+import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.security.IUserService;
+import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.security.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class UserService implements IUserService {
     public User createUser(User user){
 
         if(user.getId() != null && _userRepository.existsById(user.getId())){
-            throw new IllegalArgumentException("Usuario já cadastrado!!!");
+            throw new IllegalArgumentException("Usuário já cadastrado!!!");
         }else{
             String pass = user.getPassword();
             //cript
@@ -41,6 +41,11 @@ public class UserService implements IUserService {
     @Override
     public List<User> findAll() {
         return _userRepository.findAll();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return _userRepository.findByUsername(username);
     }
 
 }

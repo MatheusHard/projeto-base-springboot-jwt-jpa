@@ -1,11 +1,11 @@
-package com.infotrapichao.projeto_spring_jwt.src.controller;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.controllers;
 
-import com.infotrapichao.projeto_spring_jwt.src.dtos.Login;
-import com.infotrapichao.projeto_spring_jwt.src.dtos.Session;
+import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.IUserApplication;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Login;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Session;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import com.infotrapichao.projeto_spring_jwt.src.repository.UserRepository;
-import com.infotrapichao.projeto_spring_jwt.src.security.JwtService;
-import com.infotrapichao.projeto_spring_jwt.src.security.SecurityConfig;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security.JwtService;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 public class LoginController {
 
+
     @Autowired
     private PasswordEncoder encoder;
 
@@ -27,8 +28,13 @@ public class LoginController {
     @Autowired
     private JwtService jwtService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final IUserApplication _userApplication;
+
+    public LoginController(IUserApplication userApplication){
+        this._userApplication = userApplication;
+    }
+    //@Autowired
+    //private UserRepository userRepository;
 
 
    /*PostMapping("/login")
@@ -58,7 +64,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public Session login(@RequestBody Login login) {
-        User user = userRepository.findByUsername(login.getUsername());
+        User user = _userApplication.findByUsername(login.getUsername());
 
         if (user != null) {
             boolean passwordOk = encoder.matches(login.getPassword(), user.getPassword());
