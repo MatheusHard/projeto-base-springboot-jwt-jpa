@@ -4,8 +4,8 @@ import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.I
 import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Login;
 import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Session;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security.JwtService;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security.SecurityConfig;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security.JwtService;
+import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;

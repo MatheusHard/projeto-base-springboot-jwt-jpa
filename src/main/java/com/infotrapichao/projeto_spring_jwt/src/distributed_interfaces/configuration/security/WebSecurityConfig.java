@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +22,15 @@ public class WebSecurityConfig {
 
     private static final String[] SWAGGER_WHITELIST = {
             "/v2/api-docs",
+            "/v3/api-docs/**",
             "/swagger-resources",
             "/swagger-resources/**",
             "/configuration/ui",
             "/configuration/security",
             "/swagger-ui.html",
+            "/swagger-ui/index.html",
+            "/swagger-ui/**",
+            //"/v3/api-docs/swagger-config",
             "/webjars/**"
     };
     @Bean
@@ -34,6 +38,7 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/login", "/users"))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll() // 🔹 Libera acesso ao Swagger
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users").hasAnyRole( "MANAGERS")
