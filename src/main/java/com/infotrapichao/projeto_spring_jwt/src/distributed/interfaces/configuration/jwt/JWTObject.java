@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.configuration.jwt;
 
 import java.util.Arrays;
 import java.util.Date;

@@ -1,9 +1,8 @@
-package com.infotrapichao.projeto_spring_jwt.src.application.services;
+package com.infotrapichao.projeto_spring_jwt.src.application.services.security;
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.IUserApplication;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.security.IUserService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

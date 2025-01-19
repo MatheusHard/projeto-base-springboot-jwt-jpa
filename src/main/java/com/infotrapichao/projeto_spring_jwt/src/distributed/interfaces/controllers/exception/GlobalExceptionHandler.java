@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.controllers.exception;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controllers.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

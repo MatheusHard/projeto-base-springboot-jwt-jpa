@@ -1,11 +1,11 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.controllers;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controllers.security;
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.IUserApplication;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Login;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos.Session;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security.LoginDTO;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security.SessionDTO;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security.JwtService;
-import com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.configuration.security.SecurityConfig;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.configuration.jwt.JwtService;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.configuration.jwt.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class LoginController {
+public class AuthController {
 
 
     @Autowired
@@ -30,40 +30,12 @@ public class LoginController {
 
     private final IUserApplication _userApplication;
 
-    public LoginController(IUserApplication userApplication){
+    public AuthController(IUserApplication userApplication){
         this._userApplication = userApplication;
     }
-    //@Autowired
-    //private UserRepository userRepository;
-
-
-   /*PostMapping("/login")
-    public Session login(@RequestBody Login login){
-        User user = userRepository.findByUsername(login.getUsername());
-
-        if(user != null){
-            boolean passwordOk = encoder.matches(login.getPassword(), user.getPassword());
-            if(!passwordOk){
-                throw new RuntimeException("Senha inválida para o login"+ login.getUsername());
-            }
-            //Estamos enviado o token
-            Session session = new Session();
-            session.setLogin(user.getUserName());
-
-            JWTObject jwtObject = new JWTObject();
-            jwtObject.setIssueAt(new Date(System.currentTimeMillis()));
-            jwtObject.setExpiration(new Date(System.currentTimeMillis() + securityConfig.getEXPIRATION()));
-            jwtObject.setRoles(user.getRoles());
-            session.setToken(JWTCreator.create(securityConfig.getPREFIX(), securityConfig.getKEY(), jwtObject));
-
-            return session;
-        }else{
-            throw new RuntimeException("Erro ao fazer login");
-        }
-    }*/
 
     @PostMapping("/login")
-    public Session login(@RequestBody Login login) {
+    public SessionDTO login(@RequestBody LoginDTO login) {
         User user = _userApplication.findByUsername(login.getUsername());
 
         if (user != null) {
@@ -72,7 +44,7 @@ public class LoginController {
                 throw new RuntimeException("Senha inválida para o login" + login.getUsername());
             }
             //Estamos enviado o token
-            Session session = new Session();
+            SessionDTO session = new SessionDTO();
             session.setLogin(user.getUserName());
             // Definindo claims adicionais
             Map<String, Object> claims = new HashMap<>();

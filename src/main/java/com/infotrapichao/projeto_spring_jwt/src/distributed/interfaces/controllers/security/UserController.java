@@ -1,4 +1,4 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.controllers;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controllers.security;
 
 
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;

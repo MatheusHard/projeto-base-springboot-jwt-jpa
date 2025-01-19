@@ -1,6 +1,6 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed_interfaces.dtos;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security;
 
-public class Session {
+public class SessionDTO {
     private String login;
     private String token;
 
