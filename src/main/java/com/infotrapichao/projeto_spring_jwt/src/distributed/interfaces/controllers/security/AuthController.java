@@ -36,6 +36,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public SessionDTO login(@RequestBody LoginDTO login) {
+
         User user = _userApplication.findByUsername(login.getUsername());
 
         if (user != null) {
@@ -45,13 +46,13 @@ public class AuthController {
             }
             //Estamos enviado o token
             SessionDTO session = new SessionDTO();
-            session.setLogin(user.getUserName());
+            session.setLogin(user.getUsername());
             // Definindo claims adicionais
             Map<String, Object> claims = new HashMap<>();
             claims.put("roles", user.getRoles()); // Adiciona as roles do usuário ao token
             claims.put("organization", "Infotrapichao/SA"); // Exemplo de outro claim personalizado
 
-            String token = jwtService.generateToken(user.getUserName(), claims);
+            String token = jwtService.generateToken(user.getUsername(), claims);
 
             session.setToken(token);
 

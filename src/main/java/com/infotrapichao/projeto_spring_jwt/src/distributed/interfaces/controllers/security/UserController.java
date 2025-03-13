@@ -1,6 +1,8 @@
 package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controllers.security;
 
 
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security.UserDTO;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.UserMapper;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import com.infotrapichao.projeto_spring_jwt.src.domain.services.security.UserService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.security.IUserService;
@@ -23,8 +25,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@Validated  @RequestBody User user){
-        var userCreated = _userService.createUser(user);
+    public ResponseEntity<User> create(@Validated  @RequestBody UserDTO userDTO){
+
+        User usuario = UserMapper.toUser(userDTO);
+        var userCreated = _userService.createUser(usuario);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -37,9 +41,10 @@ public class UserController {
     public void put(@RequestBody User usuario){
         userRepository.save(usuario);
     }*/
+
     @GetMapping()
-    public ResponseEntity<List<User>> findAll(){
-        var lista = _userService.findAll();
+    public ResponseEntity<List<UserDTO>> findAll(){
+        var lista = UserMapper.toUserDTOList(_userService.findAll());
         return ResponseEntity.ok(lista);
     }
     @GetMapping("/{id}")
