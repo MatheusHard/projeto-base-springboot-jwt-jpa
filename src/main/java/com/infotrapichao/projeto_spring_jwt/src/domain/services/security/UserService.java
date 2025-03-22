@@ -39,6 +39,16 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User updateUser(User user) {
+
+        if(!_userRepository.existsById(user.getId())){
+            throw new IllegalArgumentException("Usuário não cadastrado!!!");
+        }else{
+             return _userRepository.save(user);
+        }
+    }
+
+    @Override
     public List<User> findAll() {
         return _userRepository.findAll();
     }

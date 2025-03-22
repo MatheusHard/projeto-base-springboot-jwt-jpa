@@ -8,6 +8,7 @@ public interface IUserService {
 
     User findById(Integer id);
     User createUser(User user);
+    User updateUser(User user);
     List<User> findAll();
     User findByUsername(String username);
 }

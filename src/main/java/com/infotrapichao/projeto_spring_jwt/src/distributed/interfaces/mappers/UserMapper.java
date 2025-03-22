@@ -7,11 +7,11 @@ import java.util.List;
 
 public class UserMapper {
     public static UserDTO toUserDTO(User user) {
-        return new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getRoles());
+        return new UserDTO(user.getId(), user.getCreatedAt(), user.getUpdatedAt(), user.getUsername(), user.getEmail(), user.getPassword(), user.getRoles());
     }
 
     public static User toUser(UserDTO userDTO) {
-        return new User(userDTO.getId(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getRoles());
+        return new User(userDTO.getId(), userDTO.getCreatedAt(), userDTO.getUpdatedAt(), userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getRoles());
     }
 
     public static List<UserDTO> toUserDTOList(List<User> users) {

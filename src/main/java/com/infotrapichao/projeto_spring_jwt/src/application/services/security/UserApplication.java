@@ -32,6 +32,9 @@ public class UserApplication implements IUserApplication {
     }
 
     @Override
+    public User updateUser(User user){ return _userService.updateUser(user);}
+
+    @Override
     public List<User> findAll() {
         return _userService.findAll();
     }
