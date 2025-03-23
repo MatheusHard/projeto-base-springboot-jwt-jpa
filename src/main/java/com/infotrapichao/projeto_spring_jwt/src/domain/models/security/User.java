@@ -1,5 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.domain.models.security;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,6 +42,10 @@ public class User {
 
     @Column(length = 255, nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Cliente> clientes;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "user"))

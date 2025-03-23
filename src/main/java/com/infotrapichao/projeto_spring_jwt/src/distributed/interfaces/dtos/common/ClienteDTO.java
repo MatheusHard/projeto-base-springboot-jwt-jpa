@@ -1,6 +1,7 @@
-package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security;
+package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common;
 
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,15 +14,15 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class ClienteDTO {
 
     private Integer id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String username;
+    private String name;
+    private String cpf;
     private String email;
-    private String password;
-    private List<String> roles;
-    private List<Cliente> clientes;
+    private String telephone;
+    private User user;
 
 }
