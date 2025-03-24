@@ -1,6 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controllers.security;
 
 
+import com.infotrapichao.projeto_spring_jwt.src.application.contracts.security.IUserApplication;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security.UserDTO;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.UserMapper;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
@@ -18,17 +19,17 @@ import java.util.List;
 @RequestMapping("users")
 public class UserController {
 
-    private final IUserService _userService;
+    private final IUserApplication _userApplication;
 
-    public UserController(UserService userService){
-        this._userService = userService;
+    public UserController(IUserApplication userApplication){
+        this._userApplication = userApplication;
     }
 
     @PostMapping
     public ResponseEntity<User> create(@Validated  @RequestBody UserDTO userDTO){
 
         User usuario = UserMapper.toUser(userDTO);
-        var userCreated = _userService.createUser(usuario);
+        var userCreated = _userApplication.createUser(usuario);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -37,19 +38,27 @@ public class UserController {
         return ResponseEntity.created(location).body(userCreated);
     }
 
-   /* @PutMapping()
-    public void put(@RequestBody User usuario){
-        userRepository.save(usuario);
-    }*/
+    @PutMapping()
+    public ResponseEntity<User> put(@RequestBody UserDTO userDTO){
+
+        User usuario = UserMapper.toUser(userDTO);
+        var userUpdated = _userApplication.updateUser(usuario);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userUpdated.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(userUpdated);    }
 
     @GetMapping()
     public ResponseEntity<List<UserDTO>> findAll(){
-        var lista = UserMapper.toUserDTOList(_userService.findAll());
+        var lista = UserMapper.toUserDTOList(_userApplication.findAll());
         return ResponseEntity.ok(lista);
     }
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable("id") Integer id){
-        var user = _userService.findById(id);
+        var user = _userApplication.findById(id);
+        user.setPassword(null);
         return ResponseEntity.ok(user);
     }
     /*
