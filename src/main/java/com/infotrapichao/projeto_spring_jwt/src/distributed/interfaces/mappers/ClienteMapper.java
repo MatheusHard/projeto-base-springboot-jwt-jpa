@@ -6,11 +6,11 @@ import java.util.List;
 
 public class ClienteMapper {
     public static ClienteDTO toClienteDTO(Cliente cliente) {
-        return new ClienteDTO(cliente.getId(), cliente.getCreatedAt(), cliente.getUpdatedAt(), cliente.getName(), cliente.getCpf(), cliente.getEmail(), cliente.getTelephone(), cliente.getUser());
+        return new ClienteDTO(cliente.getId(), cliente.getCreatedAt(), cliente.getUpdatedAt(), cliente.getName(), cliente.getCpf(), cliente.getEmail(), cliente.getTelephone(), cliente.getUser(), cliente.getAgendamentos());
     }
 
     public static Cliente toCliente(ClienteDTO clienteDTO) {
-        return new Cliente(clienteDTO.getId(), clienteDTO.getCreatedAt(), clienteDTO.getUpdatedAt(), clienteDTO.getName(), clienteDTO.getCpf(), clienteDTO.getEmail(), clienteDTO.getTelephone(), clienteDTO.getUser());
+        return new Cliente(clienteDTO.getId(), clienteDTO.getCreatedAt(), clienteDTO.getUpdatedAt(), clienteDTO.getName(), clienteDTO.getCpf(), clienteDTO.getEmail(), clienteDTO.getTelephone(), clienteDTO.getUser(), clienteDTO.getAgendamentos());
     }
 
     public static List<ClienteDTO> toClienteDTOList(List<Cliente> clientes) {

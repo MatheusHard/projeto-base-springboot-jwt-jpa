@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("clientes")
 public class ClienteController  {
 
-    IClienteApplication _clienteApplication;
+    private final IClienteApplication _clienteApplication;
 
     public ClienteController(IClienteApplication clienteApplication){
         this._clienteApplication = clienteApplication;

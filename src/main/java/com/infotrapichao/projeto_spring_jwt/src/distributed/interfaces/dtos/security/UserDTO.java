@@ -1,5 +1,6 @@
 package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security;
 
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +24,6 @@ public class UserDTO {
     private String password;
     private List<String> roles;
     private List<Cliente> clientes;
+    private List<Agendamento> agendamentos;
 
 }

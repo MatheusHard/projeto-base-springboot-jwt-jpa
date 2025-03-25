@@ -1,7 +1,6 @@
 package com.infotrapichao.projeto_spring_jwt.src.domain.models.common;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,14 +10,13 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Cliente {
+public class Agendamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,24 +29,21 @@ public class Cliente {
     @Column(name = "updated_at", columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
     private LocalDateTime updatedAt;
 
-    @Column(length = 50, nullable = false)
-    private String name;
-
-    @Column(length = 11)
-    private String cpf;
-
-    @Column(length = 50, nullable = false)
-    private String email;
-
-    @Column(length = 50, nullable = false)
-    private String telephone;
+    @Column
+    private boolean finalizado = false;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference(value = "user-agendamentos")
     private User user;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference(value = "cliente-agendamentos")
-    private List<Agendamento> agendamentos;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    @JsonBackReference(value = "cliente-agendamentos")
+    private Cliente cliente;
+
+    @Column(length = 200, nullable = false)
+    private String observacao;
+
+
 }

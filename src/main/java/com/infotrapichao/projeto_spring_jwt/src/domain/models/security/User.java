@@ -1,6 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.domain.models.security;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Cliente> clientes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "user-agendamentos")
+    private List<Agendamento> agendamentos;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "user"))
