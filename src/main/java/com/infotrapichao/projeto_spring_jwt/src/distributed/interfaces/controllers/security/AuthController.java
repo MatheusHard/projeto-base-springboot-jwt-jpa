@@ -55,6 +55,8 @@ public class AuthController {
             String token = jwtService.generateToken(user.getUsername(), claims);
 
             session.setToken(token);
+            user.setPassword(null);
+            session.setUser(user);
 
             return session;
         } else {
