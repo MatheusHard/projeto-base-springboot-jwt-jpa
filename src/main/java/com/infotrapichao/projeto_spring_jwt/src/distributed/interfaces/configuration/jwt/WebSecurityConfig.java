@@ -42,12 +42,18 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/login", "/users"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/login", "/users", "/clientes", "/agendamentos"))
                 .cors(Customizer.withDefaults()) // 👈 habilita CORS com configuração default (usa o CorsConfigurationSource abaixo)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_WHITELIST).permitAll() // 🔹 Libera acesso ao Swagger
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers( "/users").hasAnyRole( "MANAGERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.POST,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.PUT,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.GET,"/clientes").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.POST,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.PUT,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.GET,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro JWT
