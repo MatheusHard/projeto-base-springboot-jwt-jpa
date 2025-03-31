@@ -26,5 +26,5 @@ public class ClienteDTO {
     private String telephone;
     private User user;
     private List<Agendamento> agendamentos;
-
+    private boolean deletado = false;
 }

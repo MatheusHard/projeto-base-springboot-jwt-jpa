@@ -7,6 +7,7 @@ import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.C
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.UserMapper;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +39,12 @@ public class ClienteController  {
         return ResponseEntity.created(location).body(clienteCreated);
     }
 
-   /* @PutMapping()
-    public void put(@RequestBody User usuario){
-        userRepository.save(usuario);
-    }*/
+    @PutMapping()
+    public ResponseEntity<Cliente> put(@RequestBody ClienteDTO clienteDTO) {
+        Cliente cliente = ClienteMapper.toCliente(clienteDTO);
+        Cliente clienteAtualizado = _clienteApplication.update(cliente);
+        return ResponseEntity.ok(clienteAtualizado);
+    }
 
     @GetMapping()
     public ResponseEntity<List<ClienteDTO>> findAll(){

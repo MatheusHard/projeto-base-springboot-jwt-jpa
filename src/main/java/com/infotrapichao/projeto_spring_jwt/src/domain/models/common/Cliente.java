@@ -48,7 +48,10 @@ public class Cliente {
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "cliente-agendamentos")
     private List<Agendamento> agendamentos;
+
+    @Column
+    private boolean deletado = false;
 }
