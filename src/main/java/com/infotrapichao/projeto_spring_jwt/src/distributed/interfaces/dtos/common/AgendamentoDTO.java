@@ -24,4 +24,5 @@ public class AgendamentoDTO {
     private User user;
     private Cliente cliente;
     private String observacao;
+    private boolean deletado = false;
 }

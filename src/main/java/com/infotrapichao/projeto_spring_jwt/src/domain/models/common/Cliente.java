@@ -52,6 +52,6 @@ public class Cliente {
     @JsonManagedReference(value = "cliente-agendamentos")
     private List<Agendamento> agendamentos;
 
-    @Column
+    @Column(columnDefinition = "bit(1) default 0")
     private boolean deletado = false;
 }

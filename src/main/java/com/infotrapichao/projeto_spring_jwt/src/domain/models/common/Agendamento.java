@@ -45,5 +45,7 @@ public class Agendamento {
     @Column(length = 200, nullable = false)
     private String observacao;
 
+    @Column(columnDefinition = "bit(1) default 0")
+    private boolean deletado = false;
 
 }
