@@ -1,9 +1,11 @@
 package com.infotrapichao.projeto_spring_jwt.src.domain.services.common;
 
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.ClienteDTO;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.common.IClienteService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.common.ClienteRepository;
+import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.specification.ClienteSpecification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,5 +67,10 @@ public class ClienteService implements IClienteService {
     @Override
     public List<Cliente> findAll() {
         return _clienteRepository.findAll();
+    }
+
+    @Override
+    public List<Cliente> findAllByFilter(ClienteDTO filter) {
+        return _clienteRepository.findAll(ClienteSpecification.withFiltersDTO(filter));
     }
 }

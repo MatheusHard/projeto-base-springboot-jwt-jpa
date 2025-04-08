@@ -1,6 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.application.services.common;
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.common.IAgendamentoApplication;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.AgendamentoDTO;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.common.IAgendamentoService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,10 @@ public class AgendamentoApplication implements IAgendamentoApplication {
     @Override
     public List<Agendamento> findAll() {
         return _agendamentoService.findAll();
+    }
+
+    @Override
+    public List<Agendamento> findAllByFilter(AgendamentoDTO filter) {
+        return _agendamentoService.findAllByFilter(filter);
     }
 }

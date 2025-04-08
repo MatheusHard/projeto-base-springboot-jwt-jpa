@@ -1,6 +1,7 @@
 package com.infotrapichao.projeto_spring_jwt.src.application.services.common;
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.common.IClienteApplication;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.ClienteDTO;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.common.IClienteService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.security.IUserService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
@@ -39,5 +40,11 @@ public class ClienteApplication implements IClienteApplication {
     @Override
     public List<Cliente> findAll() {
         return _clienteService.findAll();
+    }
+
+    @Override
+    public List<Cliente> findAllByFilter(ClienteDTO filter) {
+        return _clienteService.findAllByFilter(filter);
+
     }
 }

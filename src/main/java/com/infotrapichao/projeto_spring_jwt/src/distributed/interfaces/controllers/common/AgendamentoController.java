@@ -2,7 +2,9 @@ package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controll
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.common.IAgendamentoApplication;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.AgendamentoDTO;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.ClienteDTO;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.AgendamentoMapper;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.ClienteMapper;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -58,5 +60,12 @@ public class AgendamentoController {
         var agendamento = _agendamentoApplication.findById(id);
         return ResponseEntity.ok(agendamento);
     }
+    @PostMapping("/filtrar")
+    public ResponseEntity<List<AgendamentoDTO>> filtrar(@RequestBody AgendamentoDTO filter) {
+        var agendamentos = _agendamentoApplication.findAllByFilter(filter);
+        var lista = AgendamentoMapper.toAgendamentoDTOList(agendamentos);
+        return ResponseEntity.ok(lista);
+    }
+
 }
 

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter
@@ -25,4 +26,9 @@ public class AgendamentoDTO {
     private Cliente cliente;
     private String observacao;
     private boolean deletado = false;
+
+    ///Filters
+    private LocalDate dataInicial;
+    private LocalDate dataFinal;
+
 }

@@ -10,7 +10,7 @@ public class AgendamentoMapper {
     public static AgendamentoDTO toAgendamentoDTO(Agendamento agendamento) {
         return new AgendamentoDTO(agendamento.getId(), agendamento.getCreatedAt(), agendamento.getUpdatedAt(),
                                   agendamento.isFinalizado(), agendamento.getUser(), agendamento.getCliente(),
-                                  agendamento.getObservacao(), agendamento.isDeletado());
+                                  agendamento.getObservacao(), agendamento.isDeletado(), null, null);
     }
 
     public static Agendamento toAgendamento(AgendamentoDTO agendamentoDTO) {

@@ -1,9 +1,12 @@
 package com.infotrapichao.projeto_spring_jwt.src.domain.services.common;
 
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.AgendamentoDTO;
 import com.infotrapichao.projeto_spring_jwt.src.domain.contracts.services.common.IAgendamentoService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.common.AgendamentoRepository;
 import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.common.ClienteRepository;
+import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.specification.AgendamentoSpecification;
+import com.infotrapichao.projeto_spring_jwt.src.infrastruture.repositories.specification.ClienteSpecification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +38,10 @@ public class AgendamentoService implements IAgendamentoService {
     @Override
     public List<Agendamento> findAll() {
         return _agendamentoRepository.findAll();
+    }
+
+    @Override
+    public List<Agendamento> findAllByFilter(AgendamentoDTO filter) {
+        return _agendamentoRepository.findAll(AgendamentoSpecification.withFiltersDTO(filter));
     }
 }

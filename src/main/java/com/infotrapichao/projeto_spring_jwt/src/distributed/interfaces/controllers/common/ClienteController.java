@@ -56,4 +56,11 @@ public class ClienteController  {
         var cliente = _clienteApplication.findById(id);
         return ResponseEntity.ok(cliente);
     }
+
+    @PostMapping("/filtrar")
+    public ResponseEntity<List<ClienteDTO>> filtrar(@RequestBody ClienteDTO filter) {
+        var clientes = _clienteApplication.findAllByFilter(filter);
+        var lista = ClienteMapper.toClienteDTOList(clientes);
+        return ResponseEntity.ok(lista);
+    }
 }
