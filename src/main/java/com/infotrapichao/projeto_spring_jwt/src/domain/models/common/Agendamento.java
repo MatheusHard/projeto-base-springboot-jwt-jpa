@@ -29,8 +29,8 @@ public class Agendamento {
     @Column(name = "updated_at", columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
     private LocalDateTime updatedAt;
 
-    @Column
-    private boolean finalizado = false;
+    @Column(columnDefinition = "bit(1) default 0")
+    private Boolean finalizado;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -46,6 +46,6 @@ public class Agendamento {
     private String observacao;
 
     @Column(columnDefinition = "bit(1) default 0")
-    private boolean deletado = false;
+    private Boolean deletado;
 
 }

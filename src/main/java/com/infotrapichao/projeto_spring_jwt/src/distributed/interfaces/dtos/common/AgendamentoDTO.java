@@ -21,14 +21,15 @@ public class AgendamentoDTO {
     private Integer id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private boolean finalizado = false;
+    private Boolean finalizado;
     private User user;
     private Cliente cliente;
     private String observacao;
-    private boolean deletado = false;
+    private Boolean deletado = false;
 
     ///Filters
     private LocalDate dataInicial;
     private LocalDate dataFinal;
+
 
 }
