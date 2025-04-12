@@ -56,7 +56,7 @@ public class AgendamentoSpecification {
             // 🔽 Ordenação por updatedAt DESC
             assert query != null;
 
-            query.orderBy(cb.desc(root.get("updatedAt")));
+            query.orderBy(cb.asc(root.get("updatedAt")));
 
             return cb.and(predicates.toArray(new Predicate[0]));
         };
