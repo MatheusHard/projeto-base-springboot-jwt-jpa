@@ -39,9 +39,9 @@ public class AgendamentoSpecification {
                 predicates.add(cb.equal(root.get("finalizado"), filtro.getFinalizado()));
             }
             ///Deletado
-            if (filtro.getDeletado() != null) {
+            /*if (filtro.getDeletado() != null) {
                 predicates.add(cb.equal(root.get("deletado"), filtro.getDeletado()));
-            }
+            }*/
             // 🔹 Filtro por intervalo de datas (between)
             if (filtro.getDataInicial() != null && filtro.getDataFinal() != null) {
                 LocalDateTime inicio = filtro.getDataInicial().atStartOfDay();

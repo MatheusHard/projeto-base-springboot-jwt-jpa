@@ -13,7 +13,7 @@ public class PessoaTest {
     @Test
     void calcIdadeCorreta(){
         Pessoa p = new Pessoa("Borumungu", LocalDateTime.of(2000, 1,1,15,0,0));
-        assertEquals(27, p.getIdade());
+        assertEquals(25, p.getIdade());
     }
 
     @Test

@@ -46,14 +46,14 @@ public class WebSecurityConfig {
                 .cors(Customizer.withDefaults()) // 👈 habilita CORS com configuração default (usa o CorsConfigurationSource abaixo)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_WHITELIST).permitAll() // 🔹 Libera acesso ao Swagger
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll() // acesso público
                         .requestMatchers( "/users").hasAnyRole( "MANAGERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.POST,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.PUT,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.GET,"/clientes").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.POST,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.PUT,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
-                        .requestMatchers(HttpMethod.GET,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins podem chamar
+                        .requestMatchers(HttpMethod.POST,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins e Users podem chamar
+                        .requestMatchers(HttpMethod.PUT,"/clientes").hasAnyRole( "MANAGERS" , "USERS") // apenas os Admins e Users podem chamar
+                        .requestMatchers(HttpMethod.GET,"/clientes").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins e Users podem chamar
+                        .requestMatchers(HttpMethod.POST,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins e Users  podem chamar
+                        .requestMatchers(HttpMethod.PUT,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins e Users podem chamar
+                        .requestMatchers(HttpMethod.GET,"/agendamentos").hasAnyRole( "MANAGERS", "USERS") // apenas os Admins e Users podem chamar
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro JWT
@@ -66,7 +66,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:4200", "http://localhost:49713")); // 👈 adicione o IP/porta do seu app Flutter, se for Web
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:4200", "http://localhost:49713", "http://localhost:53554")); // 👈 adicione o IP/porta do seu app Flutter, se for Web
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // se você estiver lidando com cookies/autenticação
