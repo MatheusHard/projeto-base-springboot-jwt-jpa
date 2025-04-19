@@ -3,6 +3,7 @@ package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.controll
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.common.IClienteApplication;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.ClienteDTO;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.security.UserDTO;
+import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.helpers.Utils;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.ClienteMapper;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.mappers.UserMapper;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
@@ -28,15 +29,21 @@ public class ClienteController  {
 
     @PostMapping
     public ResponseEntity<Cliente> create(@Validated @RequestBody ClienteDTO clienteDTO){
-
-        Cliente cliente = ClienteMapper.toCliente(clienteDTO);
-        var clienteCreated = _clienteApplication.create(cliente);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(clienteCreated.getId())
-                .toUri();
-        return ResponseEntity.created(location).body(clienteCreated);
+        try {
+            Cliente cliente = ClienteMapper.toCliente(clienteDTO);
+            Utils.savePhoto(cliente.getPhotoName(), cliente.getImagemBase64());
+            cliente.setImagemBase64(null);
+            var clienteCreated = _clienteApplication.create(cliente);
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(clienteCreated.getId())
+                    .toUri();
+            return ResponseEntity.created(location).body(clienteCreated);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @PutMapping()

@@ -54,4 +54,8 @@ public class Cliente {
 
     @Column(columnDefinition = "bit(1) default 0")
     private boolean deletado = false;
+
+    private String photoName;
+
+    private String imagemBase64;
 }
