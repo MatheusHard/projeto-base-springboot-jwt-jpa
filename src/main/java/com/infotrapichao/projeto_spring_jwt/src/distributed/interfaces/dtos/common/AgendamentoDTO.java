@@ -30,6 +30,6 @@ public class AgendamentoDTO {
     ///Filters
     private LocalDate dataInicial;
     private LocalDate dataFinal;
-
+    private LocalDateTime dataAtendimento;
 
 }

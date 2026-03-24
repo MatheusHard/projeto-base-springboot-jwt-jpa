@@ -48,4 +48,7 @@ public class Agendamento {
     @Column(columnDefinition = "bit(1) default 0")
     private Boolean deletado;
 
+    @Column(name = "data_atendimento", columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
+    private LocalDateTime dataAtendimento;
+
 }
