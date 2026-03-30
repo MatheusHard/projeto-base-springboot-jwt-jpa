@@ -31,7 +31,9 @@ public class ClienteController  {
     public ResponseEntity<Cliente> create(@Validated @RequestBody ClienteDTO clienteDTO){
         try {
             Cliente cliente = ClienteMapper.toCliente(clienteDTO);
-            Utils.savePhoto(cliente.getPhotoName(), cliente.getImagemBase64());
+            if(cliente.getPhotoName() != null && cliente.getImagemBase64() != null) {
+                Utils.savePhoto(cliente.getPhotoName(), cliente.getImagemBase64());
+            }
             cliente.setImagemBase64(null);
             var clienteCreated = _clienteApplication.create(cliente);
             URI location = ServletUriComponentsBuilder
@@ -49,7 +51,9 @@ public class ClienteController  {
     @PutMapping()
     public ResponseEntity<Cliente> put(@RequestBody ClienteDTO clienteDTO) {
         Cliente cliente = ClienteMapper.toCliente(clienteDTO);
-        Utils.savePhoto(cliente.getPhotoName(), cliente.getImagemBase64());
+        if(cliente.getPhotoName() != null && cliente.getImagemBase64() != null) {
+            Utils.savePhoto(cliente.getPhotoName(), cliente.getImagemBase64());
+        }
         cliente.setImagemBase64(null);
         Cliente clienteAtualizado = _clienteApplication.update(cliente);
         return ResponseEntity.ok(clienteAtualizado);

@@ -22,6 +22,9 @@ public class ClienteSpecification {
             if (filtro.getUser().getId() != null && filtro.getUser().getId() != 0) {
                 predicates.add(cb.equal(root.get("user").get("id"), filtro.getUser().getId()));
             }
+            /// Deletado
+                predicates.add(cb.equal(root.get("deletado"), filtro.isDeletado()));
+
            // 🔽 Ordenação por createdAt DESC
             assert query != null;
             query.orderBy(cb.asc(root.get("name")));

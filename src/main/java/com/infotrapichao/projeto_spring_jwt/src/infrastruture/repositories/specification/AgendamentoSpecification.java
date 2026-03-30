@@ -46,11 +46,11 @@ public class AgendamentoSpecification {
             if (filtro.getDataInicial() != null && filtro.getDataFinal() != null) {
                 LocalDateTime inicio = filtro.getDataInicial().atStartOfDay();
                 LocalDateTime fim = filtro.getDataFinal().atTime(LocalTime.MAX); // 23:59:59.999...
-                predicates.add(cb.between(root.get("updatedAt"), inicio, fim));
+                predicates.add(cb.between(root.get("dataAtendimento"), inicio, fim));
             } else if (filtro.getDataInicial() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("updatedAt"), filtro.getDataInicial().atStartOfDay()));
+                predicates.add(cb.greaterThanOrEqualTo(root.get("dataAtendimento"), filtro.getDataInicial().atStartOfDay()));
             } else if (filtro.getDataFinal() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("updatedAt"), filtro.getDataFinal().atTime(LocalTime.MAX)));
+                predicates.add(cb.lessThanOrEqualTo(root.get("dataAtendimento"), filtro.getDataFinal().atTime(LocalTime.MAX)));
             }
 
             // 🔽 Ordenação por updatedAt DESC
