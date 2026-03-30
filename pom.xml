@@ -128,7 +128,8 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+        <finalName>main_file</finalName>
+        <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
