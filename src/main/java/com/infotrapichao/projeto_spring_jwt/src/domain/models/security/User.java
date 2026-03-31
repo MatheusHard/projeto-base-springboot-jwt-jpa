@@ -4,10 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class User {
+
+    public User(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,12 +52,16 @@ public class User {
     @Column(name = "role_id")
     private List<String> roles = new ArrayList<>();
 
+    public User(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, String username, String email, String password, List<Cliente> clientes, List<Agendamento> agendamentos, List<String> roles) {
+    }
+
     // Método para retornar as authorities a partir das roles
     public List<GrantedAuthority> getAuthorities() {
         return this.roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // Adiciona "ROLE_" no prefixo, que é a convenção do Spring
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public String toString() {
@@ -72,5 +71,77 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

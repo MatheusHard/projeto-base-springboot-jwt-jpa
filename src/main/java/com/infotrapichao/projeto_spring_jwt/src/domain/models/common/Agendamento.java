@@ -3,21 +3,15 @@ package com.infotrapichao.projeto_spring_jwt.src.domain.models.common;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.security.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Agendamento {
 
+    public Agendamento(){}
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -51,4 +45,78 @@ public class Agendamento {
     @Column(name = "data_atendimento", columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
     private LocalDateTime dataAtendimento;
 
+    public Agendamento(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean finalizado, User user, Cliente cliente, String observacao, Boolean deletado, LocalDateTime dataAtendimento) {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Boolean getFinalizado() {
+        return finalizado;
+    }
+
+    public void setFinalizado(Boolean finalizado) {
+        this.finalizado = finalizado;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public Boolean getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado(Boolean deletado) {
+        this.deletado = deletado;
+    }
+
+    public LocalDateTime getDataAtendimento() {
+        return dataAtendimento;
+    }
+
+    public void setDataAtendimento(LocalDateTime dataAtendimento) {
+        this.dataAtendimento = dataAtendimento;
+    }
 }
