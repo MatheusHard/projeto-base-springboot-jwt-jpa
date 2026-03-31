@@ -45,7 +45,25 @@ public class Agendamento {
     @Column(name = "data_atendimento", columnDefinition = "DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6)")
     private LocalDateTime dataAtendimento;
 
-    public Agendamento(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean finalizado, User user, Cliente cliente, String observacao, Boolean deletado, LocalDateTime dataAtendimento) {
+    public Agendamento(
+            Integer id,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            Boolean finalizado,
+            User user,
+            Cliente cliente,
+            String observacao,
+            Boolean deletado,
+            LocalDateTime dataAtendimento) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.finalizado = finalizado;
+        this.user = user;
+        this.cliente = cliente;
+        this.observacao = observacao;
+        this.deletado = deletado;
+        this.dataAtendimento = dataAtendimento;
     }
 
     public Integer getId() {

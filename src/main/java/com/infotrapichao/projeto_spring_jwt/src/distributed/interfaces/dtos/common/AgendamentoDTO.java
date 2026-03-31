@@ -25,7 +25,29 @@ public class AgendamentoDTO {
     private LocalDate dataFinal;
     private LocalDateTime dataAtendimento;
 
-    public AgendamentoDTO(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean finalizado, User user, Cliente cliente, String observacao, Boolean deletado, Object o, Object o1, LocalDateTime dataAtendimento) {
+    public AgendamentoDTO(
+            Integer id,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            Boolean finalizado,
+            User user,
+            Cliente cliente,
+            String observacao,
+            Boolean deletado,
+            Object o,
+            Object o1,
+            LocalDateTime dataAtendimento) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.finalizado = finalizado;
+        this.user = user;
+        this.cliente = cliente;
+        this.observacao = observacao;
+        this.deletado = deletado;
+        //this.o = o;
+        //this.o1 = o1;
+        this.dataAtendimento = dataAtendimento;
     }
 
     public Integer getId() {

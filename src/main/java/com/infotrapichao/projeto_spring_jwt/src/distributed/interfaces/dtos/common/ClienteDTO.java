@@ -25,7 +25,31 @@ public class ClienteDTO {
     private String photoName;
     private String imagemBase64;
 
-    public ClienteDTO(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String cpf, String email, String telephone, User user, List<Agendamento> agendamentos, boolean deletado, String photoName, String imagemBase64) {
+    public ClienteDTO(
+            Integer id,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            String name,
+            String cpf,
+            String email,
+            String telephone,
+            User user,
+            List<Agendamento> agendamentos,
+            boolean deletado,
+            String photoName,
+            String imagemBase64) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.telephone = telephone;
+        this.user = user;
+        this.agendamentos = agendamentos;
+        this.deletado = deletado;
+        this.photoName = photoName;
+        this.imagemBase64 = imagemBase64;
     }
 
     public Integer getId() {
