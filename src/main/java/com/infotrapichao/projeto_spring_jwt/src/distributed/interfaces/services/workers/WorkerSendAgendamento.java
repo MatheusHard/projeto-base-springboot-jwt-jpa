@@ -2,17 +2,14 @@ package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.services
 
 import com.infotrapichao.projeto_spring_jwt.src.application.contracts.common.IAgendamentoApplication;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.AgendamentoDTO;
-import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.ClienteDTO;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.dtos.common.EmailDTO;
 import com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.services.smtp.EmailService;
 import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento;
-import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Component
 public class WorkerSendAgendamento {
@@ -36,22 +33,20 @@ public class WorkerSendAgendamento {
         //filters.se;
         var list = _agendamentoApplication.findAllByFilter(filters);
         for (Agendamento agendamento : list) {
-            sendEmail(agendamento);
+            sendEmail(agendamento, true);
+            if(agendamento.getCliente().getEmail() != null) sendEmail(agendamento, false);
         }
     }
 
-    private void sendEmail(Agendamento agendamento){
-        emailService.sendHtmlEmail(this.generateEmailDTO(agendamento));
+    private void sendEmail(Agendamento agendamento, boolean toUser){
+        emailService.sendHtmlEmail(this.generateEmailDTO(agendamento, toUser), true);
     }
-    private EmailDTO generateEmailDTO(Agendamento agendamento){
+    private EmailDTO generateEmailDTO(Agendamento agendamento, boolean toUser){
         EmailDTO email = new EmailDTO();
-        email.setNomeUsuario(agendamento.getUser().getUsername());
-        //email.setDescricao(fatura.getDescricao());
-        email.setAssunto("Fatura à Vencer");
-        email.setDestinatario(agendamento.getUser().getEmail());
+        email.setNomeUsuario(toUser ? agendamento.getUser().getUsername() : agendamento.getCliente().getName());
+        email.setAssunto("Atendimento");
+        email.setDestinatario(toUser ? agendamento.getUser().getEmail() :  agendamento.getCliente().getEmail());
         email.setRemetente("matheushard2013@gmail.com");
-        //email.setValor(fatura.getValor());
-        //email.setVencimento(fatura.getVencimento());
 
         return email;
     }

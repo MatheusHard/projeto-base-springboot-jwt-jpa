@@ -15,14 +15,14 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendHtmlEmail(EmailDTO emailDTO) {
+    public void sendHtmlEmail(EmailDTO emailDTO, boolean toUser) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
             helper.setTo(emailDTO.getDestinatario());
             helper.setSubject(emailDTO.getAssunto());
-            helper.setText(getCorpo(emailDTO), true); // true = habilita HTML
+            helper.setText(toUser ? getCorpoToUser(emailDTO) : getCorpoToClient(emailDTO), true); // true = habilita HTML
             helper.setFrom(emailDTO.getRemetente());
 
             mailSender.send(mimeMessage);
@@ -31,12 +31,10 @@ public class EmailService {
         }
     }
 
-    private String getCorpo(EmailDTO emailDTO) {
+    private String getCorpoToUser(EmailDTO emailDTO) {
         String nomeUser = emailDTO.getNomeUsuario();
-        String descricao = emailDTO.getDescricao();
-        String valor = emailDTO.getValor().toString();
-        String dataVencimento = Utils.getDataFormatada(emailDTO.getVencimento(), false);
-
+        String dataAtendimento = Utils.getDataFormatada(emailDTO.getDataAtendimento(), false);
+        String nomeCliente = emailDTO.getCliente().getName();
         return String.format("""
             <!DOCTYPE html>
             <html>
@@ -46,14 +44,36 @@ public class EmailService {
             <body style="font-family: Arial, sans-serif; font-size: 16px; color: #000;">
               <br>
                   <p>Olá <strong>Sr.(a) %s</strong>,</p>
-                  <p>Segue abaixo os detalhes da sua fatura:</p>
-                  <p>📄 Fatura: <strong style="font-size: 18px;">%s</strong></p>
-                  <p>💰 Valor: R$ %s</p>
-                  <p>📅 Vencimento: %s</p>
+                  <p>Segue abaixo os detalhes do atendimento:</p>
+                  <p>📄 Cliente: <strong style="font-size: 18px;">%s</strong></p>
+                  <p>📅 Data: %s</p>
               <br>
                   <p>Por favor, verifique as informações até a data de vencimento para evitar encargos adicionais.</p>
             </body>
             </html>
-            """, nomeUser, descricao, valor, dataVencimento);
+            """, nomeUser, nomeCliente, dataAtendimento);
+    }
+
+    private String getCorpoToClient(EmailDTO emailDTO) {
+        String nomeUser = emailDTO.getNomeUsuario();
+        String dataAtendimento = Utils.getDataFormatada(emailDTO.getDataAtendimento(), false);
+        String nomeCliente = emailDTO.getCliente().getName();
+        return String.format("""
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset="UTF-8">
+            </head>
+            <body style="font-family: Arial, sans-serif; font-size: 16px; color: #000;">
+              <br>
+                  <p>Olá <strong>Sr.(a) %s</strong>,</p>
+                  <p>Segue abaixo os detalhes do atendimento:</p>
+                  <p>📄 Cliente: <strong style="font-size: 18px;">%s</strong></p>
+                  <p>📅 Data: %s</p>
+              <br>
+                  <p>Por favor, verifique as informações até a data de vencimento para evitar encargos adicionais.</p>
+            </body>
+            </html>
+            """, nomeUser, nomeCliente, dataAtendimento);
     }
 }

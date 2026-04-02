@@ -10,12 +10,20 @@ public class EmailDTO {
     private String nomeUsuario;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private LocalDateTime vencimento;
+    private LocalDateTime dataAtendimento;
     private String remetente;
     private String destinatario;
     private String assunto;
     private String corpo;
-    private BigDecimal valor;
+    private ClienteDTO cliente;
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -48,15 +56,6 @@ public class EmailDTO {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    public LocalDateTime getVencimento() {
-        return vencimento;
-    }
-
-    public void setVencimento(LocalDateTime vencimento) {
-        this.vencimento = vencimento;
-    }
-
     public String getRemetente() {
         return remetente;
     }
@@ -89,11 +88,11 @@ public class EmailDTO {
         this.corpo = corpo;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    public LocalDateTime getDataAtendimento() {
+        return dataAtendimento;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setDataAtendimento(LocalDateTime dataAtendimento) {
+        this.dataAtendimento = dataAtendimento;
     }
 }
