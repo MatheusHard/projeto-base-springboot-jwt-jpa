@@ -19,15 +19,15 @@ public class AgendamentoSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             /// Por Nome Cliente
-            if (filtro.getCliente().getName() != null && !filtro.getCliente().getName().isBlank()) {
+            if (filtro.getCliente() != null && filtro.getCliente().getName() != null && !filtro.getCliente().getName().isBlank()) {
                 predicates.add(cb.like(cb.lower(root.get("name")), "%" + filtro.getCliente().getName().toLowerCase() + "%"));
             }
             /// Por Cliente Id
-            if (filtro.getCliente().getId() != null && filtro.getCliente().getId() != 0) {
+            if (filtro.getCliente() != null && filtro.getCliente().getId() != null && filtro.getCliente().getId() != 0) {
                 predicates.add(cb.equal(root.get("cliente").get("id"), filtro.getCliente().getId()));
             }
             /// por User Id:
-            if (filtro.getUser().getId() != null && filtro.getUser().getId() != 0) {
+            if (filtro.getUser() != null && filtro.getUser().getId() != null && filtro.getUser().getId() != 0) {
                 predicates.add(cb.equal(root.get("user").get("id"), filtro.getUser().getId()));
             }
             /// Data

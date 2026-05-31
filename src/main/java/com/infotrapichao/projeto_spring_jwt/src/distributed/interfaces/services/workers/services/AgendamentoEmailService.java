@@ -6,6 +6,8 @@ import com.infotrapichao.projeto_spring_jwt.src.domain.models.common.Agendamento
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AgendamentoEmailService {
 
@@ -27,7 +29,10 @@ public class AgendamentoEmailService {
         EmailDTO email = buildEmail(
                 agendamento.getUser().getUsername(),
                 agendamento.getUser().getEmail(),
-                "Novo agendamento recebido"
+                "Novo agendamento recebido",
+                agendamento.getDataAtendimento(),
+                agendamento.getCliente().getName()
+
         );
         emailService.sendHtmlEmail(email, true);
     }
@@ -36,18 +41,24 @@ public class AgendamentoEmailService {
         EmailDTO email = buildEmail(
                 agendamento.getCliente().getName(),
                 agendamento.getCliente().getEmail(),
-                "Confirmação de agendamento"
+                "Confirmação de agendamento",
+                agendamento.getDataAtendimento(),
+                agendamento.getCliente().getName()
         );
 
         emailService.sendHtmlEmail(email, true);
     }
 
-    private EmailDTO buildEmail(String nome, String destinatario, String assunto) {
+    private EmailDTO buildEmail(String nomeUsuario, String destinatario, String assunto, LocalDateTime dataAtendimento, String nomeCliente) {
         EmailDTO email = new EmailDTO();
-        email.setNomeUsuario(nome);
+        email.setNomeUsuario(nomeUsuario);
+        email.setNomeCliente(nomeCliente);
         email.setDestinatario(destinatario);
         email.setAssunto(assunto);
         email.setRemetente("matheushard2013@gmail.com");
+        email.setDataAtendimento(dataAtendimento);
+
+
         return email;
     }
 }
