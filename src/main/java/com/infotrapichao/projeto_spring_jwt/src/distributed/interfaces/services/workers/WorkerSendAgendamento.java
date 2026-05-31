@@ -20,13 +20,13 @@ public class WorkerSendAgendamento {
         this.emailService = emailService;
     }
 
-    @Scheduled(cron = "0 58 15 * * *", zone = "America/Sao_Paulo") // 1º segundos; 2º minutos; 3º horas [Campo]
+    @Scheduled(cron = "0 0 6 * * *", zone = "America/Sao_Paulo") // 1º segundos; 2º minutos; 3º horas [Campo]
     public void executarTarefaDiaria() {
 
         System.out.println("Iniciando envio de emails...");
 
         AgendamentoDTO filters = new AgendamentoDTO();
-        filters.setDataInicial(LocalDate.now()); //TODO
+        filters.setDataInicial(LocalDate.now());
         filters.setDataFinal(LocalDate.now());
 
         var lista = agendamentoApplication.findAllByFilter(filters);
@@ -39,7 +39,6 @@ public class WorkerSendAgendamento {
                 e.printStackTrace();
             }
         });
-
         System.out.println("Finalizado envio de emails.");
     }
 }
