@@ -2,10 +2,21 @@ package com.infotrapichao.projeto_spring_jwt.src.distributed.interfaces.helpers;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 public class Utils {
 
+    public static String getDataFormatada(LocalDateTime data, boolean max){
+        DateTimeFormatter formatter;
+        if(!max) {
+            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        }else{
+            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        }
+        return data.format(formatter);
+    }
     public static void savePhoto(String photoName, String imagemBase64) {
         try {
             if (photoName == null || imagemBase64 == null)
