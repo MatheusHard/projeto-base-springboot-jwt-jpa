@@ -23,9 +23,6 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expiration; // Tempo de expiração do token em milissegundos
 
-    private String secret2 = "minhaChaveSecretaMuitoSeguraDemaisTaDoidoBizoinho123456789"; // Evite valores curtos!
-    private long expiration2 = 1000 * 60 * 60 * 10; // Exemplo: 10 horas de validade
-
     // 1. Extrai o username (ou outro campo específico) do token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -38,25 +35,15 @@ public class JwtService {
     }
 
     // 3. Gera um novo token para o usuário
-    /*public String generateToken(String username, Map<String, Object> extraClaims) {
-        return Jwts.builder()
-                .setClaims(extraClaims)
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration ))
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
-    }*/
-    // 3. Gera um novo token para o usuário
     public String generateToken(String username, Map<String, Object> extraClaims) {
         // Cria uma chave baseada na string 'secret'
-        Key key = Keys.hmacShaKeyFor(secret2.getBytes(StandardCharsets.UTF_8));
+        Key key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration2))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(key, SignatureAlgorithm.HS256) // Usando o método atualizado
                 .compact();
     }
@@ -84,7 +71,7 @@ public class JwtService {
 
     // Extrai todas as claims do token
     public Claims extractAllClaims(String token) {
-        Key key = Keys.hmacShaKeyFor(secret2.getBytes(StandardCharsets.UTF_8)); // Mesma chave usada na geração
+        Key key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)); // Mesma chave usada na geração
         Claims claims = null;
         try {
             claims = Jwts.parserBuilder()
