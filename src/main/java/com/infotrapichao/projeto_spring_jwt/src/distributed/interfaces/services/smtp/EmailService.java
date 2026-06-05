@@ -34,7 +34,7 @@ public class EmailService {
     private String getCorpoToUser(EmailDTO emailDTO) {
         String nomeUser = emailDTO.getNomeUsuario();
         String dataAtendimento = Utils.getDataFormatada(emailDTO.getDataAtendimento(), false);
-        String nomeCliente = emailDTO.getCliente().getName();
+        String nomeCliente = emailDTO.getNomeCliente();
         return String.format("""
             <!DOCTYPE html>
             <html>
@@ -57,7 +57,7 @@ public class EmailService {
     private String getCorpoToClient(EmailDTO emailDTO) {
         String nomeUser = emailDTO.getNomeUsuario();
         String dataAtendimento = Utils.getDataFormatada(emailDTO.getDataAtendimento(), false);
-        String nomeCliente = emailDTO.getCliente().getName();
+        String nomeCliente = emailDTO.getNomeCliente();
         return String.format("""
             <!DOCTYPE html>
             <html>

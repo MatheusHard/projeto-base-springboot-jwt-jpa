@@ -8,6 +8,7 @@ public class EmailDTO {
     public EmailDTO(){}
     private String descricao;
     private String nomeUsuario;
+    private String nomeCliente;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime dataAtendimento;
@@ -16,6 +17,14 @@ public class EmailDTO {
     private String assunto;
     private String corpo;
     private ClienteDTO cliente;
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
 
     public ClienteDTO getCliente() {
         return cliente;
